@@ -1,0 +1,352 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            opacity: 0.08;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* Geometric shapes background */
+        .shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 50%;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(0, -60px) rotate(180deg); }
+            75% { transform: translate(-30px, -30px) rotate(270deg); }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 40px 20px;
+            max-width: 900px;
+            position: relative;
+        }
+
+
+
+        .error-wrapper {
+            margin: 50px 0 50px;
+            position: relative;
+        }
+
+        .error-code {
+            font-size: 200px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -8px;
+            animation: glitchPulse 4s infinite;
+            position: relative;
+            filter: drop-shadow(0 0 60px rgba(102, 126, 234, 0.4));
+        }
+
+        @keyframes glitchPulse {
+            0%, 100% { 
+                transform: scale(1);
+            }
+            1% { 
+                transform: scale(1.02) skew(1deg);
+            }
+            2% {
+                transform: scale(0.98) skew(-1deg);
+            }
+        }
+
+        .error-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.8;
+            animation: floatAround 6s ease-in-out infinite;
+        }
+
+        .icon-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .icon-2 {
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .icon-3 {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .icon-4 {
+            bottom: 20%;
+            right: 5%;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -15px) rotate(5deg); }
+            50% { transform: translate(-5px, -25px) rotate(-5deg); }
+            75% { transform: translate(-10px, -10px) rotate(3deg); }
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            margin-top: 30px;
+        }
+
+        .error-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .error-subtitle {
+            font-size: 20px;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 50px;
+            line-height: 1.8;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error-message .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-size: 17px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn span, .btn i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 2px solid #667eea;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px) scale(1.05);
+            border-color: #764ba2;
+        }
+
+        .btn-secondary:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .error-wrapper {
+                margin: 40px 0 40px;
+            }
+
+            .error-code {
+                font-size: 130px;
+                letter-spacing: -5px;
+            }
+
+            .floating-icon {
+                font-size: 35px;
+            }
+
+            .content-box {
+                padding: 40px 25px;
+            }
+
+            .error-title {
+                font-size: 36px;
+            }
+
+            .error-subtitle {
+                font-size: 18px;
+            }
+
+            .error-message {
+                font-size: 16px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 100px;
+            }
+
+            .error-title {
+                font-size: 30px;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+
+            .shape {
+                display: none;
+            }
+        }
