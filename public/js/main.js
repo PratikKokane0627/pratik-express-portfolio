@@ -151,7 +151,7 @@ document.getElementById('downloadResume').addEventListener('click', function (e)
     e.preventDefault();
 
     // Replace this URL with the actual path to your resume file
-    const resumeUrl = '/resume/Pratik_Kokane_Resume.pdf';
+    const resumeUrl = '/resume/Pratik_Kokane_MERN_Stack.pdf';
 
     // Add loading state to button
     const originalText = this.innerHTML;
