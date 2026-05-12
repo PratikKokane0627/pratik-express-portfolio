@@ -9,6 +9,7 @@
 
 * {
     margin: 0;
+
     padding: 0;
     box-sizing: border-box;
 }
@@ -1144,7 +1145,83 @@ section {
 .btn-github {
     animation: githubPulse 2s infinite;
 }
+/* Live Demo Button Styles */
+.btn-live {
+    background: linear-gradient(135deg, #6c63ff 0%, #8b5cf6 100%);
+    color: #ffffff;
+    border: 2px solid #6c63ff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    margin-top: auto;
+}
 
+/* Shine Effect */
+.btn-live::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.btn-live:hover::before {
+    left: 100%;
+}
+
+/* Hover Effects */
+.btn-live:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
+    background: linear-gradient(135deg, #5a52e0 0%, #7c3aed 100%);
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* Icon Animation */
+.btn-live i {
+    transition: transform 0.3s ease;
+}
+
+.btn-live:hover i {
+    transform: rotate(-10deg) scale(1.2);
+}
+
+/* Pulse Animation */
+@keyframes livePulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.5),
+                    0 0 20px rgba(139, 92, 246, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    }
+}
+
+.btn-live {
+    animation: livePulse 2s infinite;
+}
 .project-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
