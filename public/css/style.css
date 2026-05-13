@@ -1145,11 +1145,16 @@ section {
 .btn-github {
     animation: githubPulse 2s infinite;
 }
-/* Live Demo Button Styles */
+
+/* =========================
+   Live Demo Button Styles
+   Same Style as GitHub Button
+========================= */
+
 .btn-live {
-    background: linear-gradient(135deg, #6c63ff 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
     color: #ffffff;
-    border: 2px solid #6c63ff;
+    border: 2px solid #24292e;
     padding: 10px 20px;
     border-radius: 25px;
     font-weight: 600;
@@ -1160,7 +1165,7 @@ section {
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3);
     margin-top: auto;
 }
 
@@ -1185,12 +1190,12 @@ section {
     left: 100%;
 }
 
-/* Hover Effects */
+/* Hover Effect */
 .btn-live:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
-    background: linear-gradient(135deg, #5a52e0 0%, #7c3aed 100%);
-    border-color: #ffffff;
+    box-shadow: 0 8px 25px rgba(36, 41, 46, 0.5);
+    background: linear-gradient(135deg, #1a1e22 0%, #24292e 100%);
+    border-color: #0366d6;
     color: #ffffff;
 }
 
@@ -1200,28 +1205,30 @@ section {
 }
 
 .btn-live:hover i {
-    transform: rotate(-10deg) scale(1.2);
+    transform: rotate(360deg) scale(1.2);
 }
 
 /* Pulse Animation */
 @keyframes livePulse {
     0% {
-        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3);
     }
 
     50% {
-        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.5),
-                    0 0 20px rgba(139, 92, 246, 0.4);
+        box-shadow:
+            0 4px 15px rgba(36, 41, 46, 0.5),
+            0 0 20px rgba(3, 102, 214, 0.3);
     }
 
     100% {
-        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3);
     }
 }
 
 .btn-live {
     animation: livePulse 2s infinite;
 }
+
 .project-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -1733,3 +1740,37 @@ section {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+
+/* Mobile Project Buttons Fix */
+@media (max-width: 576px) {
+    .project-links,
+    .project-buttons,
+    .btn-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .btn-github,
+    .btn-live {
+        width: 180px;
+        min-height: 48px;
+        padding: 10px 16px;
+        font-size: 15px;
+        border-radius: 18px;
+        margin-top: 0;
+        gap: 8px;
+    }
+
+    .project-card {
+        padding-bottom: 30px;
+    }
+}
+
+
+
+

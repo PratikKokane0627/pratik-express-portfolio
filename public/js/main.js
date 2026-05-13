@@ -1,55 +1,68 @@
 // Scroll Progress Bar
 window.addEventListener('scroll', () => {
     const scrollProgress = document.querySelector('.scroll-progress');
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / scrollHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
+
+    if (scrollProgress) {
+        const scrollHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        scrollProgress.style.width = scrolled + '%';
+    }
 });
 
-// Smooth scrolling
+
+// Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
 
-    // Ignore empty or invalid hashes
-    if (targetId.length <= 1) return;
+        // Ignore empty hashes
+        if (targetId.length <= 1) return;
 
-    const target = document.querySelector(targetId);
-    if (!target) return;
+        const target = document.querySelector(targetId);
 
-    e.preventDefault();
+        if (!target) return;
 
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+        e.preventDefault();
+
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        // Close mobile navbar
+        const navbarCollapse = document.querySelector('.navbar-collapse.show');
+
+        if (navbarCollapse) {
+            navbarCollapse.classList.remove('show');
+        }
     });
-
-    // Close mobile navbar (Bootstrap)
-    const navbarCollapse = document.querySelector('.navbar-collapse.show');
-    if (navbarCollapse) {
-      navbarCollapse.classList.remove('show');
-    }
-  });
 });
 
 
-// Navbar scroll effect
-window.addEventListener('scroll', function () {
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     }
 });
 
-// Intersection Observer for animations
+
+// Intersection Observer Animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver(function (entries) {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
@@ -57,19 +70,25 @@ const observer = new IntersectionObserver(function (entries) {
     });
 }, observerOptions);
 
-// Observe all animated elements
-document.querySelectorAll('.section-title, .skill-category, .project-card, .about-text, .contact-form, .contact-info, .education-card, .cert-card, .about-image-wrapper, .about-stats').forEach(el => {
+
+// Observe Elements
+document.querySelectorAll(
+    '.section-title, .skill-category, .project-card, .about-text, .contact-form, .contact-info, .education-card, .cert-card, .about-image-wrapper, .about-stats'
+).forEach(el => {
     observer.observe(el);
 });
 
-// Active nav link
-window.addEventListener('scroll', function () {
+
+// Active Nav Link
+window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
     let current = '';
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
+
         if (window.scrollY >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
@@ -77,114 +96,122 @@ window.addEventListener('scroll', function () {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
+
+        if (link.getAttribute('href')?.slice(1) === current) {
             link.classList.add('active');
         }
     });
 });
 
-// Array to store all form submissions
+
+// Contact Form
 let messagesList = [];
 
-// Form submission
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+const contactForm = document.getElementById('contactForm');
 
-    // Create message object with current timestamp
-    const formData = {
-        id: Date.now(), // Unique ID using timestamp
-        name: this.name.value,
-        email: this.email.value,
-        subject: this.subject.value,
-        message: this.message.value,
-        timestamp: new Date().toISOString(),
-        status: 'unread'
-    };
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    // Add the new message to the array
-    messagesList.push(formData);
+        const formData = {
+            id: Date.now(),
+            name: this.name.value,
+            email: this.email.value,
+            subject: this.subject.value,
+            message: this.message.value,
+            timestamp: new Date().toISOString(),
+            status: 'unread'
+        };
 
-    // Log the new message and all messages (for demonstration)
-    console.log('New Message:', formData);
-    console.log('All Messages:', messagesList);
+        // Store Message
+        messagesList.push(formData);
 
-    const submitBtn = this.querySelector('.btn-submit');
-    const originalText = submitBtn.innerHTML;
+        console.log('New Message:', formData);
+        console.log('All Messages:', messagesList);
 
-    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
-    submitBtn.disabled = true;
+        const submitBtn = this.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
 
-    setTimeout(() => {
-        submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Message Sent!';
-        submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        submitBtn.innerHTML =
+            '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
+
+        submitBtn.disabled = true;
 
         setTimeout(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.style.background = '';
-            submitBtn.disabled = false;
-            this.reset();
-            alert(`Thank you for your message, ${formData.name}! I will get back to you soon.\n\nMessage ID: ${formData.id}`);
-        }, 2000);
-    }, 1500);
-});
+            submitBtn.innerHTML =
+                '<i class="fas fa-check me-2"></i>Message Sent!';
 
-// Back to Top Button
+            submitBtn.style.background =
+                'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+
+                this.reset();
+
+                alert(
+                    `Thank you for your message, ${formData.name}! I will get back to you soon.\n\nMessage ID: ${formData.id}`
+                );
+            }, 2000);
+        }, 1500);
+    });
+}
+
+
+// Back To Top Button
 const backToTop = document.getElementById('backToTop');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.classList.add('show');
-    } else {
-        backToTop.classList.remove('show');
+    if (backToTop) {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
     }
 });
 
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
-
-// Resume Download Functionality
-document.getElementById('downloadResume').addEventListener('click', function (e) {
-    e.preventDefault();
-
-    // Replace this URL with the actual path to your resume file
-    const resumeUrl = '/resume/Pratik_Kokane_MERN_Stack.pdf';
-
-    // Add loading state to button
-    const originalText = this.innerHTML;
-    this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Downloading...';
-    this.style.pointerEvents = 'none';
-
-    // Create a temporary link element
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = 'Pratik_Kokane_Resume.pdf'; // The name that will be used when downloading
-    link.target = '_blank';
-
-    // Handle download error
-    link.onerror = () => {
-        this.innerHTML = originalText;
-        this.style.pointerEvents = 'auto';
-        alert('Sorry, the resume file is not available at the moment. Please try again later.');
-    };
-
-    // Simulate download process (remove setTimeout in production and replace with actual file check)
-    setTimeout(() => {
-        // Reset button state
-        this.innerHTML = originalText;
-        this.style.pointerEvents = 'auto';
-
-        // Trigger download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }, 1500);
-});
+}
 
 
+// Resume Download
+const downloadResume = document.getElementById('downloadResume');
 
+if (downloadResume) {
+    downloadResume.addEventListener('click', function (e) {
+        e.preventDefault();
 
-  
+        const resumeUrl = '/resume/Pratik_Kokane_MERN_Stack.pdf';
+
+        const originalText = this.innerHTML;
+
+        this.innerHTML =
+            '<i class="fas fa-spinner fa-spin me-2"></i>Downloading...';
+
+        this.style.pointerEvents = 'none';
+
+        const link = document.createElement('a');
+
+        link.href = resumeUrl;
+        link.download = 'Pratik_Kokane_Resume.pdf';
+        link.target = '_blank';
+
+        setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.pointerEvents = 'auto';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, 1500);
+    });
+}
