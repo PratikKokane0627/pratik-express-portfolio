@@ -190,7 +190,7 @@ if (downloadResume) {
     downloadResume.addEventListener('click', function (e) {
         e.preventDefault();
 
-        const resumeUrl = '/resume/Pratik_Kokane_MERN_Stack.pdf';
+        const resumeUrl = '/resume/Pratik_MernStack_Resume.pdf';
 
         const originalText = this.innerHTML;
 
